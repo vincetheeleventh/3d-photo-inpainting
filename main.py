@@ -50,8 +50,9 @@ for idx in tqdm(range(len(sample_list))):
 
     print(f"Running depth extraction at {time.time()}")
     if config['require_midas'] is True:
+        image_width = image.shape[1]
         run_depth([sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
-                  config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=640)
+                  config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=image_width)
     if 'npy' in config['depth_format']:
         config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
     else:
